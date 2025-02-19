@@ -2,12 +2,16 @@ import asyncio
 import json
 from asyncio import StreamReader, StreamWriter
 from datetime import datetime, timezone
+from parsers import parse_request_line
 
 host = "127.0.0.1"
 port = 8000
 
 
 async def handler(reader: StreamReader, writer: StreamWriter):
+    request = await reader.read(1024)
+    request_line = request.decode().split("\r\n")[0]
+    print(parse_request_line(request_line))
     time = datetime.now(timezone.utc).isoformat()
     response = json.dumps({"time": time})
     http_header = (
