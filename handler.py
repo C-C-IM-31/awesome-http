@@ -2,7 +2,7 @@ from asyncio import StreamReader, StreamWriter
 from typing import Callable
 import json
 
-class HTTPhandler:
+class HTTPHandler:
 
     ROUTES = {
         "GET": {},

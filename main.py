@@ -1,5 +1,6 @@
 import asyncio
 from http_server import HTTPServer
+from handler import HTTPHandler
 import json
 from datetime import datetime, timezone
 
@@ -11,8 +12,9 @@ async def get_time():
     return json.dumps({"time": time})
 
 async def main():
-    http_server = HTTPServer(host, port)
-    http_server.add_route()("GET", "/time", get_time)
+    http_handler = HTTPHandler()
+    http_handler.add_route("GET", "/time", get_time)
+    http_server = HTTPServer(host, port, http_handler)
     await http_server.serve_forever()
 
 

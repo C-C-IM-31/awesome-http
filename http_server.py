@@ -1,17 +1,12 @@
 import asyncio
-from typing import Callable
-
-from handler import HTTPhandler
+from handler import HTTPHandler
 
 
 class HTTPServer:
-    def __init__(self, host: str, port: int):
+    def __init__(self, host: str, port: int, handler: HTTPHandler=HTTPHandler()):
         self._host = host
         self._port = port
-        self._handler = HTTPhandler()
-
-    def add_route(self) -> Callable:
-        return self._handler.add_route
+        self._handler = handler
 
     async def serve_forever(self):
         server = await asyncio.start_server(self._handler.handler, self._host, self._port)
