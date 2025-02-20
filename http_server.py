@@ -3,7 +3,7 @@ from handler import HTTPHandler
 
 
 class HTTPServer:
-    def __init__(self, host: str, port: int, handler: HTTPHandler=HTTPHandler()):
+    def __init__(self, host: str, port: int, handler: HTTPHandler = HTTPHandler()):
         self._host = host
         self._port = port
         self._handler = handler

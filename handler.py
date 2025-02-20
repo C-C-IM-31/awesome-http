@@ -15,10 +15,8 @@ class HTTPHandler:
         "CONNECT": {}
     }
 
-
     def add_route(self, method: str, path: str, handler: Callable) -> None:
         self.ROUTES[method][path] = handler
-
 
     async def handler(self, reader: StreamReader, writer: StreamWriter):
         request = await reader.read(1024)
@@ -44,12 +42,10 @@ class HTTPHandler:
         writer.close()
         await writer.wait_closed()
 
-
     def _parse_request_line(self, line: str) -> tuple[str, str, str] | None:
         parsed = line.strip().split(" ")
         valid = len(parsed) == 3 and parsed[0] in self.ROUTES.keys() and parsed[2].startswith("HTTP")
         return parsed if valid else None
-
 
     @staticmethod
     def _get_header(response_status: str, response: str) -> str:
