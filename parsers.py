@@ -1,5 +1,3 @@
-import re
-
 METHODS = (
     "GET",
     "POST",
